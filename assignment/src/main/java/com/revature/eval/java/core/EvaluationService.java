@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,15 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String acronym = "";
+		
+		String removedPunctuations = phrase.replaceAll("[^a-zA-Z\\\\s]"," ");
+		String singleSpaceWords = removedPunctuations.replaceAll("[ ]{2,}", " ");
+
+		for(String a : singleSpaceWords.split(" ")) {
+			acronym += a.toUpperCase().charAt(0);
+		}
+		return acronym;
 	}
 
 	/**
@@ -85,17 +94,34 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo && sideTwo == sideThree) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo || sideTwo == sideThree || sideThree == sideOne) {
+				return true;
+			}
+			else {
+				return false;
+
+			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne != sideTwo && sideTwo != sideThree && sideThree != sideOne) {
+				return true;
+			}
+			else {
+				return false;
+
+			}
 		}
 
 	}
@@ -117,6 +143,28 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
+		int onePointCounter = 0;
+		int twoPointCounter = 0;
+		int threePointCounter = 0;
+		int fourPointCounter = 0;
+		int fivePointCounter = 0;
+		int eightPointCounter = 0;
+		int tenPointCounter = 0;
+		int totalPointCounter = 0;
+		
+		char[] charArray = string.toCharArray();
+		final String matchCharactersFor1 = "AEIOULNRST";
+		final String matchCharactersFor3 = "BCMP";
+		final String matchCharactersFor4 = "FHVWY";
+		for (char c : charArray) {
+		    if (c == 'G') {
+		        twoPointCounter += 1;
+		    }
+		    if (c == 'K') {
+		    	fivePointCounter += 1;
+		    }
+		}		
+            
 		return 0;
 	}
 
