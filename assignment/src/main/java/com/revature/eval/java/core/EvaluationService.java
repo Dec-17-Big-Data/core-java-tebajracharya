@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omg.CORBA.Environment;
 
@@ -687,7 +688,20 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int sumOfMultiple = 0;
+		List<Integer> multiples = new ArrayList<Integer>();
+		for (Integer number: set) {
+			for (int temp = 1; temp < i; temp++) {
+				if (temp % number == 0) {
+					multiples.add(temp);
+				}
+			}
+		}
+		List<Integer> uniqueMultiples = multiples.stream().distinct().collect(Collectors.toList());
+		for (int each: uniqueMultiples) {
+			sumOfMultiple += each;
+		}
+		return sumOfMultiple;
 	}
 
 	/**
@@ -781,7 +795,20 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		String remPunctuation = string.substring(0,string.length()-1);
+		String temp [] = remPunctuation.split(" ");
+		String mathType = temp[3];
+		int output = 0;
+
+		switch (mathType) {
+		case "plus" : output = Integer.parseInt(temp[2]) + Integer.parseInt(temp[4]); break;
+		case "minus" : output = Integer.parseInt(temp[2]) - Integer.parseInt(temp[4]); break;
+		case "multiplied" : output = Integer.parseInt(temp[2]) * Integer.parseInt(temp[5]); break;
+		case "divided" : output = Integer.parseInt(temp[2]) / Integer.parseInt(temp[5]); break;
+		default : throw new IllegalArgumentException();
+		}
+
+		return output;
 	}
 
 }
